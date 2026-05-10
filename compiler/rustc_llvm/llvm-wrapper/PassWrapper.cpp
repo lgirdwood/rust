@@ -91,11 +91,9 @@ extern "C" void LLVMRustTimeTraceProfilerFinish(const char *FileName) {
 extern "C" bool LLVMRustHasFeature(LLVMTargetMachineRef TM,
                                    const char *Feature) {
   TargetMachine *Target = unwrap(TM);
-#if LLVM_VERSION_GE(23, 0)
-  const MCSubtargetInfo &MCInfo = Target->getMCSubtargetInfo();
-#else
+  // NOTE: local LLVM fork is versioned 23 but still returns a pointer here
+  // (upstream made this a reference in 23). Always dereference.
   const MCSubtargetInfo &MCInfo = *Target->getMCSubtargetInfo();
-#endif
   return MCInfo.checkFeatures(std::string("+") + Feature);
 }
 
@@ -278,11 +276,7 @@ static llvm::DebugCompressionType fromRust(LLVMRustCompressionKind Kind) {
 extern "C" void LLVMRustPrintTargetCPUs(LLVMTargetMachineRef TM,
                                         RustStringRef OutStr) {
   ArrayRef<SubtargetSubTypeKV> CPUTable =
-#if LLVM_VERSION_GE(23, 0)
-      unwrap(TM)->getMCSubtargetInfo().getAllProcessorDescriptions();
-#else
       unwrap(TM)->getMCSubtargetInfo()->getAllProcessorDescriptions();
-#endif
   auto OS = RawRustStringOstream(OutStr);
 
   // Just print a bare list of target CPU names, and let Rust-side code handle
@@ -294,11 +288,7 @@ extern "C" void LLVMRustPrintTargetCPUs(LLVMTargetMachineRef TM,
 
 extern "C" size_t LLVMRustGetTargetFeaturesCount(LLVMTargetMachineRef TM) {
   const TargetMachine *Target = unwrap(TM);
-#if LLVM_VERSION_GE(23, 0)
-  const MCSubtargetInfo &MCInfo = Target->getMCSubtargetInfo();
-#else
   const MCSubtargetInfo &MCInfo = *Target->getMCSubtargetInfo();
-#endif
   const ArrayRef<SubtargetFeatureKV> FeatTable =
       MCInfo.getAllProcessorFeatures();
   return FeatTable.size();
@@ -308,11 +298,7 @@ extern "C" void LLVMRustGetTargetFeature(LLVMTargetMachineRef TM, size_t Index,
                                          const char **Feature,
                                          const char **Desc) {
   const TargetMachine *Target = unwrap(TM);
-#if LLVM_VERSION_GE(23, 0)
-  const MCSubtargetInfo &MCInfo = Target->getMCSubtargetInfo();
-#else
   const MCSubtargetInfo &MCInfo = *Target->getMCSubtargetInfo();
-#endif
   const ArrayRef<SubtargetFeatureKV> FeatTable =
       MCInfo.getAllProcessorFeatures();
   const SubtargetFeatureKV Feat = FeatTable[Index];
