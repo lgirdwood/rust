@@ -1,0 +1,31 @@
+{
+  "llvm-target": "xtensa-none-elf",
+  "arch": "xtensa",
+  "cpu": "intel_ace30_ptl",
+  "data-layout": "e-m:e-p:32:32-i8:8:32-i16:16:32-i64:64-n32",
+  "target-endian": "little",
+  "target-pointer-width": 32,
+  "target-c-int-width": 32,
+  "os": "none",
+  "vendor": "intel",
+  "executables": true,
+  "linker-flavor": "gnu-cc",
+  "linker": "xtensa-intel_ace30_ptl_zephyr-elf-gcc",
+  "panic-strategy": "abort",
+  "relocation-model": "static",
+  "emit-debug-gdb-scripts": false,
+  "max-atomic-width": 32,
+  "atomic-cas": true,
+  "features": "",
+  "pre-link-args": {
+    "gnu-cc": [
+      "-nostartfiles"
+    ]
+  },
+  "metadata": {
+    "description": "Xtensa Intel ACE30 PTL (Zephyr SDK toolchain)",
+    "tier": 3,
+    "host_tools": false,
+    "std": false
+  }
+}
