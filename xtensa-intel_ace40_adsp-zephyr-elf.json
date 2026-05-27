@@ -1,7 +1,7 @@
 {
   "llvm-target": "xtensa-none-elf",
   "arch": "xtensa",
-  "cpu": "intel_ace30_adsp",
+  "cpu": "intel_ace40_adsp",
   "data-layout": "e-m:e-p:32:32-i8:8:32-i16:16:32-i64:64-n32",
   "target-endian": "little",
   "target-pointer-width": 32,
@@ -16,14 +16,14 @@
   "emit-debug-gdb-scripts": false,
   "max-atomic-width": 32,
   "atomic-cas": true,
-  "features": "+density,+windowed,+bool,+loop,+sext,+nsa,+mul16,+mul32,+mul32high,+div32,+s32c1i,+threadptr,+debug,+exception,+highpriinterrupts,+highpriinterrupts-level5,+coprocessor,+interrupt,+dcache,+rvector,+timers2,+prid,+miscsr,+minmax,+clamps,+hifi4",
+  "features": "+density,+windowed,+bool,+loop,+sext,+nsa,+mul16,+mul32,+mul32high,+div32,+s32c1i,+threadptr,+debug,+exception,+highpriinterrupts,+highpriinterrupts-level5,+coprocessor,+interrupt,+dcache,+rvector,+timers2,+prid,+miscsr,+minmax,+clamps,+hifi5",
   "pre-link-args": {
     "gnu-cc": [
       "-nostartfiles"
     ]
   },
   "metadata": {
-    "description": "Xtensa Intel ACE30 ADSP (Panther Lake / Lunar Lake, Zephyr SDK toolchain)",
+    "description": "Xtensa Intel ACE40 ADSP (NVL, Zephyr SDK toolchain)",
     "tier": 3,
     "host_tools": false,
     "std": false

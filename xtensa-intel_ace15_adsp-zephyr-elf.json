@@ -16,7 +16,7 @@
   "emit-debug-gdb-scripts": false,
   "max-atomic-width": 32,
   "atomic-cas": true,
-  "features": "",
+  "features": "+density,+windowed,+bool,+loop,+sext,+nsa,+mul16,+mul32,+mul32high,+div32,+s32c1i,+threadptr,+debug,+exception,+highpriinterrupts,+highpriinterrupts-level4,+coprocessor,+interrupt,+dcache,+rvector,+timers1,+prid,+minmax,+clamps,+hifi4",
   "pre-link-args": {
     "gnu-cc": [
       "-nostartfiles"
